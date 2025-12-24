@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прогноз погоды</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1 class="app-title">Прогноз погоды</h1>
+            <button id="refresh-btn" class="refresh-button">Обновить</button>
+        </header>
+        
+        <main class="weather-container" id="weather-container">
+            <!-- Контейнер для карточек погоды будет заполнен через JS -->
+        </main>
+        
+        <aside class="city-management">
+            <button id="add-city-btn" class="add-city-button">Добавить город</button>
+            <div id="city-list" class="city-list">
+                <!-- Список городов будет заполнен через JS -->
+            </div>
+        </aside>
+    </div>
+    
+    <!-- Модальное окно для добавления города -->
+    <div id="city-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Добавить город</h2>
+            <div class="input-container">
+                <input type="text" id="city-input" placeholder="Введите название города">
+                <div id="city-suggestions" class="city-suggestions hidden">
+                    <!-- Список предложений городов будет заполнен через JS -->
+                </div>
+                <div id="city-error" class="error-message hidden"></div>
+            </div>
+            <div class="modal-buttons">
+                <button id="confirm-add-city">Добавить</button>
+                <button id="cancel-add-city">Отмена</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Уведомление об ошибке -->
+    <div id="error-notification" class="notification hidden">
+        <div class="notification-content">
+            <p id="error-message"></p>
+            <button id="close-error">Закрыть</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

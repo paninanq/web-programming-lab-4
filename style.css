@@ -1,0 +1,458 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #fef6f8 0%, #fceef1 100%);
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Основной контейнер */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+    min-height: 80vh;
+}
+
+/* Хедер */
+.app-header {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-title {
+    font-size: 2.5rem;
+    color: #f0959ab7;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.refresh-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    background: rgba(240, 149, 170, 0.2);
+    color: #71394a;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.refresh-button:hover {
+    background: rgba(240, 149, 170, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Контейнер для погоды */
+.weather-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    align-content: start;
+}
+
+/* Карточка погоды */
+.weather-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(240, 149, 171, 0.15);
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(240, 149, 170, 0.1);
+}
+
+.weather-card:hover {
+    transform: translateY(-5px);
+}
+
+.weather-card.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+
+.weather-card.error {
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+
+.city-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #3d1a28;
+}
+
+.current-date {
+    font-size: 0.9rem;
+    color: #b85a70;
+    margin-bottom: 15px;
+}
+
+.current-weather {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.weather-icon {
+    width: 80px;
+    height: 80px;
+    margin-right: 15px;
+}
+
+.temperature {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #3d1a28;
+}
+
+.weather-description {
+    font-size: 1.1rem;
+    color: #9a4360;
+    margin-bottom: 20px;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+}
+
+.detail-label {
+    font-weight: 600;
+    margin-right: 5px;
+    color: #b85a70;
+}
+
+.detail-value {
+    color: #3d1a28;
+}
+
+.forecast {
+    margin-top: 20px;
+    border-top: 1px solid #f0d0d6;
+    padding-top: 15px;
+}
+
+.forecast-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #3d1a28;
+}
+
+.forecast-days {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.forecast-day {
+    text-align: center;
+    padding: 10px;
+    background: rgba(240, 149, 170, 0.08);
+    border-radius: 10px;
+}
+
+.forecast-date {
+    font-size: 0.9rem;
+    color: #b85a70;
+    margin-bottom: 5px;
+}
+
+.forecast-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 5px;
+}
+
+.forecast-temp {
+    font-weight: 600;
+    color: #3d1a28;
+}
+
+/* Управление городами */
+.city-management {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(240, 149, 171, 0.15);
+    height: fit-content;
+    border: 1px solid rgba(240, 149, 170, 0.1);
+}
+
+.add-city-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 15px;
+    background: #f0959ab7;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.add-city-button:hover {
+    background: #e0818e;
+    transform: translateY(-2px);
+}
+
+.city-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.city-item {
+    padding: 10px 15px;
+    background: rgba(240, 149, 170, 0.08);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.city-item:hover {
+    background: rgba(240, 149, 170, 0.15);
+}
+
+.city-item.active {
+    background: rgba(240, 149, 170, 0.25);
+    font-weight: 600;
+}
+
+.delete-city {
+    background: none;
+    border: none;
+    color: #f27a80;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-city:hover {
+    color: #ed415d;
+}
+
+/* Модальное окно */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 12px 30px rgba(240, 149, 171, 0.3);
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: #3d1a28;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+#city-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #f0d0d6;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+#city-input:focus {
+    outline: none;
+    border-color: #f0959ab7;
+    box-shadow: 0 0 0 3px rgba(240, 149, 171, 0.2);
+}
+
+.city-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(240, 149, 171, 0.2);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.city-suggestions.hidden {
+    display: none;
+}
+
+.suggestion-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.suggestion-item:hover {
+    background: #fceef1;
+}
+
+.error-message {
+    color: #ed415d;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.error-message.hidden {
+    display: none;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#confirm-add-city {
+    background: #f0959ab7;
+    color: white;
+}
+
+#confirm-add-city:hover {
+    background: #e0818e;
+}
+
+#cancel-add-city {
+    background: #f0d0d6;
+    color: #3d1a28;
+}
+
+#cancel-add-city:hover {
+    background: #e0b8c0;
+}
+
+/* Уведомление об ошибке */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(240, 149, 171, 0.2);
+    padding: 15px 20px;
+    max-width: 300px;
+    z-index: 1000;
+    border: 1px solid rgba(240, 149, 170, 0.2);
+}
+
+.notification.hidden {
+    display: none;
+}
+
+.notification-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#close-error {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    color: #b85a70;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* Индикатор загрузки */
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(240, 149, 170, 0.2);
+    border-radius: 50%;
+    border-top-color: #f0959ab7;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .app-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .weather-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .forecast-days {
+        grid-template-columns: 1fr;
+    }
+}
