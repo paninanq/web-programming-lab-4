@@ -1,4 +1,5 @@
 // Конфигурация;
+const API_KEY = "bf480fa62981409686c133635252412"
 const API_BASE_URL = 'https://api.weatherapi.com/v1';
 const FORECAST_DAYS = 3; // Сегодня + 2 следующих дня
 
